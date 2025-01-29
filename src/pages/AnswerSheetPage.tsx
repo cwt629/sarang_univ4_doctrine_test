@@ -14,7 +14,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { answerSheet } from "../constant/answersheet";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+  ArrowBack,
+  ArrowForward,
+  PriorityHighRounded,
+} from "@mui/icons-material";
 import styled from "@emotion/styled";
 import { Answer, Verses } from "../types/Question";
 import Necessary from "../common/Necessary";
@@ -58,7 +62,7 @@ const AnswerSheetPage = () => {
     // 정규식 패턴 생성 (단어 경계를 유지하기 위해 \b 사용, 특수문자 이스케이프 필요)
     const regex = new RegExp(
       `(${includes
-        .map((word) => word.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"))
+        .map((word) => word.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"))
         .join("|")})`,
       "gi"
     );
@@ -82,14 +86,16 @@ const AnswerSheetPage = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "60px",
+        gap: "30px",
       }}
     >
       <Box sx={{ width: "100%" }}>
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
-          제자훈련 교리시험 WorkSheet
+        <Typography
+          sx={{ textAlign: "center", fontSize: "2rem", fontWeight: "bolder" }}
+        >
+          제자훈련 교리시험
         </Typography>
-        <Typography variant="body1" sx={{ textAlign: "right" }}>
+        <Typography sx={{ textAlign: "right", fontSize: "0.8rem" }}>
           Powered by HAWRO
         </Typography>
       </Box>
@@ -109,46 +115,45 @@ const AnswerSheetPage = () => {
           ))}
         </Select>
       </FormControl>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          padding: "2rem",
-          minHeight: "40vh",
-          boxShadow:
-            "rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;",
-        }}
-      >
-        <ArrowWrapper>
+      <SheetWrapper>
+        <PrevArrowWrapper>
           <IconButton
             disabled={chapter === 1 && questionNumber === 0}
             onClick={() => handlePrevQuestionClick()}
           >
             <ArrowBack />
           </IconButton>
-        </ArrowWrapper>
+        </PrevArrowWrapper>
         <Box
           sx={{
-            flex: 1,
+            width: "100%",
+            margin: "20px",
+            boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
             gap: "24px",
           }}
         >
+          {answerSheet[chapter - 1].questions[questionNumber].necessary ? (
+            <Chip
+              icon={<PriorityHighRounded />}
+              label="반드시 출제되는 항목!!"
+              color="primary"
+              size="small"
+            />
+          ) : (
+            ""
+          )}
           <Typography
-            variant="h5"
             sx={{
               width: "100%",
+              fontSize: "1.2rem",
+              fontWeight: "bold",
               display: "flex",
               alignItems: "center",
               gap: "12px",
             }}
           >
-            {answerSheet[chapter - 1].questions[questionNumber].necessary ? (
-              <Chip label="필수!" color="primary" />
-            ) : (
-              ""
-            )}
             Q. {answerSheet[chapter - 1].questions[questionNumber].question}
           </Typography>
 
@@ -203,7 +208,7 @@ const AnswerSheetPage = () => {
           </TableWrapper>
         </Box>
 
-        <ArrowWrapper>
+        <NextArrowWrapper>
           <IconButton
             disabled={
               questionNumber >= answerSheet[chapter - 1].questions.length - 1 &&
@@ -213,19 +218,44 @@ const AnswerSheetPage = () => {
           >
             <ArrowForward />
           </IconButton>
-        </ArrowWrapper>
-      </Box>
+        </NextArrowWrapper>
+      </SheetWrapper>
     </Box>
   );
 };
 
 export default AnswerSheetPage;
 
-const ArrowWrapper = styled.div`
+const SheetWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 0.5rem;
+  flex: 1;
+  position: relative;
+  margin: 8px;
+  box-sizing: border-box;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+`;
+
+const PrevArrowWrapper = styled.div`
   width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  left: -25px;
+`;
+
+const NextArrowWrapper = styled.div`
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  right: -25px;
 `;
 
 const TableWrapper = styled.div`
