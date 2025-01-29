@@ -1,6 +1,7 @@
 export interface Answer {
     text: string;
     includes: string[];
+    verses?: Verses[];
 }
 
 export interface Verses {
