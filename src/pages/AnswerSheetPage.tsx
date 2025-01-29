@@ -163,8 +163,8 @@ const AnswerSheetPage = () => {
                 {answerSheet[chapter - 1].questions[questionNumber].answers.map(
                   (answer: Answer, index: number) => (
                     <TableRow key={index}>
-                      <TableCell sx={{ width: "5%" }}>({index + 1})</TableCell>
-                      <TableCell sx={{ width: "95%" }}>
+                      <TableCell>({index + 1})</TableCell>
+                      <TableCell>
                         {getHighlightedAnswerArray(
                           answer.text,
                           answer.includes
@@ -270,6 +270,8 @@ const TableWrapper = styled.div`
     word-break: break-all;
   }
   & td:nth-of-type(1) {
+    width: 5%;
+    min-width: 25px;
     font-weight: bold;
   }
 `;
