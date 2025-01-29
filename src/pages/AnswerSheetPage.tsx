@@ -247,6 +247,9 @@ const PrevArrowWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: -25px;
+  background-color: beige;
+  opacity: 0.7;
+  border-radius: 50px;
 `;
 
 const NextArrowWrapper = styled.div`
@@ -257,6 +260,9 @@ const NextArrowWrapper = styled.div`
   position: absolute;
   top: 50%;
   right: -25px;
+  background-color: beige;
+  opacity: 0.7;
+  border-radius: 50px;
 `;
 
 const TableWrapper = styled.div`
