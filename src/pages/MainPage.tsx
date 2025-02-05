@@ -6,14 +6,21 @@ import styled from "@emotion/styled";
 import MainTitle from "../components/MainTitle";
 import ChapterDropdown from "../components/ChapterDropdown";
 import AnswerSheet from "../components/AnswerSheet";
+import TestSwitch from "../components/TestSwitch";
+import TestSheet from "../components/TestSheet";
 
 const MainPage = () => {
   const [chapter, setChapter] = useState(1);
   const [questionNumber, setQuestionNumber] = useState(0);
+  const [isTestingMode, setIsTestingMode] = useState<boolean>(false);
 
   const handleChapterChange = (nextChapter: number) => {
     setChapter(nextChapter);
     setQuestionNumber(0);
+  };
+
+  const handleModeChange = (checked: boolean) => {
+    setIsTestingMode(checked);
   };
 
   const handleNextQuestionClick = () => {
@@ -49,7 +56,10 @@ const MainPage = () => {
         chapter={chapter}
         handleChapterChange={handleChapterChange}
       />
-
+      <TestSwitch
+        isTestingMode={isTestingMode}
+        handleModeChange={handleModeChange}
+      />
       <SheetWrapper>
         <ArrowWrapper className="prev">
           <IconButton
@@ -59,7 +69,11 @@ const MainPage = () => {
             <ArrowBack />
           </IconButton>
         </ArrowWrapper>
-        <AnswerSheet chapter={chapter} questionNumber={questionNumber} />
+        {isTestingMode ? (
+          <TestSheet chapter={chapter} questionNumber={questionNumber} />
+        ) : (
+          <AnswerSheet chapter={chapter} questionNumber={questionNumber} />
+        )}
         <ArrowWrapper className="next">
           <IconButton
             disabled={
@@ -84,7 +98,6 @@ const MainPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
 `;
 
 const SheetWrapper = styled.div`

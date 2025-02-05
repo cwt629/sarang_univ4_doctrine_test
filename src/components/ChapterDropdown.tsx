@@ -11,7 +11,7 @@ const ChapterDropdown = ({
   handleChapterChange,
 }: ChapterDropdownProps) => {
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth sx={{ marginTop: "20px" }}>
       <InputLabel id="chapter-filter">Chapter</InputLabel>
       <Select
         labelId="chapter-filter"
