@@ -17,9 +17,9 @@ const TestSwitch = ({ isTestingMode, handleModeChange }: TestSwitchProps) => {
       }
       label={
         isTestingMode ? (
-          <b style={{ color: "#1976d2" }}>Test ON</b>
+          <b style={{ color: "var(--body-blue)" }}>Test ON</b>
         ) : (
-          <b style={{ color: "rgb(118, 118, 118)" }}>Test OFF</b>
+          <b style={{ color: "var(--body-gray)" }}>Test OFF</b>
         )
       }
     />

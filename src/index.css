@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+:root {
+  --body-blue: #1976d2;
+  --body-gray: rgb(118, 118, 118);
+}
+
 body {
   margin: 0;
   display: flex;
