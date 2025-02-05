@@ -1,10 +1,10 @@
 import { Box, Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { answerSheet } from "../constant/answersheet";
 import { SheetContentWrapper } from "../wrapper/SheetContentWrapper";
-import styled from "@emotion/styled";
 import { Answer, Verses } from "../types/Question";
 import { getHighlightedAnswerArray } from "../utils/getHighlightedAnswerArray";
 import Question from "./Question";
+import { TableWrapper } from "../wrapper/TableWrapper";
 
 interface AnswerSheetProps {
   chapter: number;
@@ -64,14 +64,3 @@ const AnswerSheet = ({ chapter, questionNumber }: AnswerSheetProps) => {
 };
 
 export default AnswerSheet;
-
-const TableWrapper = styled.div`
-  & * {
-    word-break: break-all;
-  }
-  & td:nth-of-type(1) {
-    width: 5%;
-    min-width: 25px;
-    font-weight: bold;
-  }
-`;
