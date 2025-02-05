@@ -1,17 +1,15 @@
-import './App.css'
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AnswerSheetPage from './pages/AnswerSheetPage';
+import MainPage from "./pages/MainPage";
 
 function App() {
-  
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<AnswerSheetPage/>}/>
+        <Route path="/" element={<MainPage />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
