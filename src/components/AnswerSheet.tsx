@@ -1,18 +1,10 @@
-import {
-  Box,
-  Chip,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { answerSheet } from "../constant/answersheet";
 import { SheetContentWrapper } from "../wrapper/SheetContentWrapper";
 import styled from "@emotion/styled";
-import { PriorityHighRounded } from "@mui/icons-material";
 import { Answer, Verses } from "../types/Question";
 import { getHighlightedAnswerArray } from "../utils/getHighlightedAnswerArray";
+import Question from "./Question";
 
 interface AnswerSheetProps {
   chapter: number;
@@ -22,29 +14,7 @@ interface AnswerSheetProps {
 const AnswerSheet = ({ chapter, questionNumber }: AnswerSheetProps) => {
   return (
     <SheetContentWrapper>
-      {answerSheet[chapter - 1].questions[questionNumber].necessary ? (
-        <Chip
-          icon={<PriorityHighRounded />}
-          label="반드시 출제되는 항목!!"
-          color="primary"
-          size="small"
-        />
-      ) : (
-        ""
-      )}
-      <Typography
-        sx={{
-          width: "100%",
-          fontSize: "1.2rem",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-        }}
-      >
-        Q. {answerSheet[chapter - 1].questions[questionNumber].question}
-      </Typography>
-
+      <Question chapter={chapter} questionNumber={questionNumber} />
       <TableWrapper>
         <Table>
           <TableBody>
