@@ -1,22 +1,25 @@
 import { IconButton } from "@mui/material";
-import { useState } from "react";
-import { answerSheet } from "../constant/answersheet";
+import { useMemo, useState } from "react";
+import { answerIndices, IndexInfo } from "../constant/answersheet";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import MainTitle from "../components/MainTitle";
-import ChapterDropdown from "../components/ChapterDropdown";
+import QuestionDropdown from "../components/QuestionDropdown";
 import AnswerSheet from "../components/AnswerSheet";
 import TestSwitch from "../components/TestSwitch";
 import TestSheet from "../components/TestSheet";
 
 const MainPage = () => {
-  const [chapter, setChapter] = useState(1);
-  const [questionNumber, setQuestionNumber] = useState(0);
   const [isTestingMode, setIsTestingMode] = useState<boolean>(false);
+  const [questionIndex, setQuestionIndex] = useState<number>(0);
 
-  const handleChapterChange = (nextChapter: number) => {
-    setChapter(nextChapter);
-    setQuestionNumber(0);
+  const { chapter, questionIndex: questionNumber } = useMemo<IndexInfo>(
+    () => answerIndices[questionIndex],
+    [questionIndex]
+  );
+
+  const handleDropdownItemChange = (nextIndex: number) => {
+    setQuestionIndex(nextIndex);
   };
 
   const handleModeChange = (checked: boolean) => {
@@ -24,37 +27,19 @@ const MainPage = () => {
   };
 
   const handleNextQuestionClick = () => {
-    // 현 챕터의 끝인 경우
-    if (
-      chapter - 1 < answerSheet.length - 1 &&
-      questionNumber >= answerSheet[chapter - 1].questions.length - 1
-    ) {
-      setChapter((prev) => prev + 1);
-      setQuestionNumber(0);
-      return;
-    }
-    setQuestionNumber((prev) => prev + 1);
+    setQuestionIndex((prev) => prev + 1);
   };
 
   const handlePrevQuestionClick = () => {
-    // 현 챕터의 처음인 경우
-    if (chapter > 1 && questionNumber === 0) {
-      setChapter((prev) => {
-        const nextChapter = prev - 1;
-        setQuestionNumber(answerSheet[nextChapter - 1].questions.length - 1);
-        return nextChapter;
-      });
-      return;
-    }
-    setQuestionNumber((prev) => prev - 1);
+    setQuestionIndex((prev) => prev - 1);
   };
 
   return (
     <MainPageWrapper>
       <MainTitle />
-      <ChapterDropdown
-        chapter={chapter}
-        handleChapterChange={handleChapterChange}
+      <QuestionDropdown
+        qIndex={questionIndex}
+        handleDropdownItemChange={handleDropdownItemChange}
       />
       <TestSwitch
         isTestingMode={isTestingMode}
@@ -63,7 +48,7 @@ const MainPage = () => {
       <SheetWrapper>
         <ArrowWrapper className="prev">
           <IconButton
-            disabled={chapter === 1 && questionNumber === 0}
+            disabled={questionIndex <= 0}
             onClick={() => handlePrevQuestionClick()}
           >
             <ArrowBack />
@@ -76,10 +61,7 @@ const MainPage = () => {
         )}
         <ArrowWrapper className="next">
           <IconButton
-            disabled={
-              questionNumber >= answerSheet[chapter - 1].questions.length - 1 &&
-              chapter >= answerSheet.length
-            }
+            disabled={questionIndex >= answerIndices.length - 1}
             onClick={() => handleNextQuestionClick()}
           >
             <ArrowForward />

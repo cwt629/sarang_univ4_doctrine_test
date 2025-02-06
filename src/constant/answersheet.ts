@@ -6,6 +6,11 @@ interface AnswerSheetChapter {
   questions: Question[];
 }
 
+export interface IndexInfo {
+  chapter: number;
+  questionIndex: number;
+}
+
 export const answerSheet: AnswerSheetChapter[] = [];
 // 제1장: 사람의 목적
 answerSheet[0] = {
@@ -745,3 +750,32 @@ answerSheet[9] = {
     },
   ],
 };
+
+// answerSheet 바탕으로 순서대로 챕터와 questionIndex를 저장한다
+export const answerIndices: IndexInfo[] = [];
+let questionCount = 0;
+for (let chapter = 1; chapter <= answerSheet.length; chapter++) {
+  for (
+    let questionIndex = 0;
+    questionIndex < answerSheet[chapter - 1].questions.length;
+    questionIndex++
+  ) {
+    answerIndices[questionCount++] = { chapter, questionIndex };
+  }
+}
+
+export function getIndexByChapterAndQNumber(chapter: number, qnum: number) {
+  let index = -1;
+
+  for (let i = 0; i < answerIndices.length; i++) {
+    if (
+      answerIndices[i].chapter === chapter &&
+      answerIndices[i].questionIndex === qnum
+    ) {
+      index = i;
+      break;
+    }
+  }
+
+  return index;
+}
