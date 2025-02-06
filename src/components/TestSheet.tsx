@@ -12,8 +12,9 @@ import { TableWrapper } from "../wrapper/TableWrapper";
 import Question from "./Question";
 import { answerSheet } from "../constant/answersheet";
 import { Answer, Verses } from "../types/Question";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TestInputBlock from "./TestInputBlock";
+import { CreateRounded, Replay } from "@mui/icons-material";
 
 interface TestSheepProps {
   chapter: number;
@@ -22,6 +23,18 @@ interface TestSheepProps {
 
 const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const handleSubmitButtonClick = () => {
+    setIsSubmitted(true);
+  };
+
+  const handleRetryButtonClick = () => {
+    setIsSubmitted(false);
+  };
+
+  useEffect(() => {
+    setIsSubmitted(false); // 문제가 바뀔 때마다 초기화
+  }, [chapter, questionNumber]);
 
   return (
     <SheetContentWrapper>
@@ -81,9 +94,25 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
         </Table>
       </TableWrapper>
       <SubmitButtonWrapper>
-        <Button color="primary" variant="contained">
-          제출
-        </Button>
+        {isSubmitted ? (
+          <Button
+            color="primary"
+            variant="outlined"
+            startIcon={<Replay />}
+            onClick={() => handleRetryButtonClick()}
+          >
+            재시도
+          </Button>
+        ) : (
+          <Button
+            color="primary"
+            variant="contained"
+            startIcon={<CreateRounded />}
+            onClick={() => handleSubmitButtonClick()}
+          >
+            제출
+          </Button>
+        )}
       </SubmitButtonWrapper>
     </SheetContentWrapper>
   );

@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 
 interface TestInputBlockProps {
@@ -14,16 +14,33 @@ const TestInputBlock = ({
   includes = [],
 }: TestInputBlockProps) => {
   const inputRef = useRef(null);
+  const [submittedAnswer, setSubmittedAnswer] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setSubmittedAnswer(inputRef.current.value);
+    } else {
+      setSubmittedAnswer(null);
+    }
+  }, [isSubmitted]);
+
+  useEffect(() => {
+    setSubmittedAnswer(null);
+  }, [answer, includes]);
 
   return (
     <InputBlockWrapper>
-      <TextField
-        label="답안"
-        fullWidth
-        multiline
-        size="small"
-        inputRef={inputRef}
-      />
+      {submittedAnswer ? (
+        <>{submittedAnswer}</>
+      ) : (
+        <TextField
+          label="답안"
+          fullWidth
+          multiline
+          size="small"
+          inputRef={inputRef}
+        />
+      )}
     </InputBlockWrapper>
   );
 };
