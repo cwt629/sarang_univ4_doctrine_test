@@ -1,9 +1,19 @@
-import { Table, TableBody, TableCell, TableRow } from "@mui/material";
+import styled from "@emotion/styled";
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from "@mui/material";
 import { SheetContentWrapper } from "../wrapper/SheetContentWrapper";
 import { TableWrapper } from "../wrapper/TableWrapper";
 import Question from "./Question";
 import { answerSheet } from "../constant/answersheet";
-import { Answer } from "../types/Question";
+import { Answer, Verses } from "../types/Question";
+import { useState } from "react";
+import TestInputBlock from "./TestInputBlock";
 
 interface TestSheepProps {
   chapter: number;
@@ -11,6 +21,8 @@ interface TestSheepProps {
 }
 
 const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
   return (
     <SheetContentWrapper>
       <Question chapter={chapter} questionNumber={questionNumber} />
@@ -22,11 +34,15 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
                 <TableRow key={index}>
                   <TableCell>({index + 1})</TableCell>
                   <TableCell>
-                    {/* {getHighlightedAnswerArray(answer.text, answer.includes)}
+                    <TestInputBlock
+                      answer={answer.text}
+                      includes={answer.includes}
+                      isSubmitted={isSubmitted}
+                    />
                     {answer.verses &&
-                      answer.verses.map((verse: Verses, innerindex: number) => (
+                      answer.verses.map((verse: Verses, verseIndex: number) => (
                         <Box
-                          key={"v" + innerindex}
+                          key={verseIndex}
                           sx={{
                             margin: "10px 0",
                             display: "flex",
@@ -34,23 +50,29 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
                           }}
                         >
                           {verse.from ? (
-                            <Box sx={{ width: "100%" }}>
-                              <b>말씀 주소: </b>
-                              {verse.from}
-                            </Box>
+                            <AdditionalInputWrapper>
+                              <b>말씀 주소:</b>&nbsp;
+                              <TestInputBlock
+                                answer={verse.from}
+                                isSubmitted={isSubmitted}
+                              />
+                            </AdditionalInputWrapper>
                           ) : (
                             ""
                           )}
                           {verse.text ? (
-                            <Box sx={{ width: "100%" }}>
-                              <b>구절: </b>
-                              {verse.text}
-                            </Box>
+                            <AdditionalInputWrapper>
+                              <b>구절:</b>&nbsp;
+                              <TestInputBlock
+                                answer={verse.text}
+                                isSubmitted={isSubmitted}
+                              />
+                            </AdditionalInputWrapper>
                           ) : (
                             ""
                           )}
                         </Box>
-                      ))} */}
+                      ))}
                   </TableCell>
                 </TableRow>
               )
@@ -58,8 +80,28 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
           </TableBody>
         </Table>
       </TableWrapper>
+      <SubmitButtonWrapper>
+        <Button color="primary" variant="contained">
+          제출
+        </Button>
+      </SubmitButtonWrapper>
     </SheetContentWrapper>
   );
 };
 
 export default TestSheet;
+
+const AdditionalInputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+`;
+
+const SubmitButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+`;
