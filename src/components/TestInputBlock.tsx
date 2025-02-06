@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
+import InputCheckResult from "./InputCheckResult";
 
 interface TestInputBlockProps {
   isSubmitted: boolean;
@@ -25,13 +26,17 @@ const TestInputBlock = ({
   }, [isSubmitted]);
 
   useEffect(() => {
-    setSubmittedAnswer(null);
-  }, [answer, includes]);
+    setSubmittedAnswer(null); // 다른 문제로 넘어갈 때마다 초기화
+  }, [answer]);
 
   return (
     <InputBlockWrapper>
-      {submittedAnswer ? (
-        <>{submittedAnswer}</>
+      {submittedAnswer !== null ? (
+        <InputCheckResult
+          userInput={submittedAnswer}
+          answer={answer}
+          includes={includes}
+        />
       ) : (
         <TextField
           label="답안"

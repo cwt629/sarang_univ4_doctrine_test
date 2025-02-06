@@ -1,8 +1,7 @@
-import Necessary from "../common/Necessary";
-
 export const getHighlightedAnswerArray = (
   answer: string,
-  includes: string[]
+  includes: string[],
+  color: string
 ) => {
   // 정규식 패턴 생성 (단어 경계를 유지하기 위해 \b 사용, 특수문자 이스케이프 필요)
   const regex = new RegExp(
@@ -16,7 +15,9 @@ export const getHighlightedAnswerArray = (
   const parts = answer.split(regex);
   return parts.map((part, index) =>
     includes.some((word) => word.toLowerCase() === part.toLowerCase()) ? (
-      <Necessary key={index}>{part}</Necessary>
+      <b key={index} style={{ color: color }}>
+        {part}
+      </b>
     ) : (
       part
     )

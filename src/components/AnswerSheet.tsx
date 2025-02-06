@@ -23,7 +23,11 @@ const AnswerSheet = ({ chapter, questionNumber }: AnswerSheetProps) => {
                 <TableRow key={index}>
                   <TableCell>({index + 1})</TableCell>
                   <TableCell>
-                    {getHighlightedAnswerArray(answer.text, answer.includes)}
+                    {getHighlightedAnswerArray(
+                      answer.text,
+                      answer.includes,
+                      "var(--body-red)"
+                    )}
                     {answer.verses &&
                       answer.verses.map((verse: Verses, innerindex: number) => (
                         <Box

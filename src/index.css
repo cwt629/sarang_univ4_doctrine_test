@@ -24,6 +24,8 @@
 :root {
   --body-blue: #1976d2;
   --body-gray: rgb(118, 118, 118);
+  --body-green: green;
+  --body-red: red;
 }
 
 body {
