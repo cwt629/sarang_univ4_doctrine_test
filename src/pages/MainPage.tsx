@@ -1,7 +1,11 @@
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useMemo, useState } from "react";
 import { answerIndices, IndexInfo } from "../constant/answersheet";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+  ArrowBack,
+  ArrowForward,
+  QuestionMarkRounded,
+} from "@mui/icons-material";
 import styled from "@emotion/styled";
 import MainTitle from "../components/MainTitle";
 import QuestionDropdown from "../components/QuestionDropdown";
@@ -20,6 +24,18 @@ const MainPage = () => {
 
   const handleDropdownItemChange = (nextIndex: number) => {
     setQuestionIndex(nextIndex);
+  };
+
+  const handleRandomTestButtonClick = () => {
+    setQuestionIndex((prev) => {
+      let randomIndex = -1;
+      do {
+        randomIndex = Math.floor(Math.random() * answerIndices.length); // 0 ~ 최대번호+1 사이의 아무 번호나 고른다
+      } while (randomIndex === prev); // 이전과 다른 숫자가 나오도록 함
+
+      return randomIndex;
+    });
+    setIsTestingMode(true);
   };
 
   const handleModeChange = (checked: boolean) => {
@@ -41,10 +57,21 @@ const MainPage = () => {
         qIndex={questionIndex}
         handleDropdownItemChange={handleDropdownItemChange}
       />
-      <TestSwitch
-        isTestingMode={isTestingMode}
-        handleModeChange={handleModeChange}
-      />
+      <TesterWrapper>
+        <TestSwitch
+          isTestingMode={isTestingMode}
+          handleModeChange={handleModeChange}
+        />
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<QuestionMarkRounded />}
+          size="small"
+          onClick={() => handleRandomTestButtonClick()}
+        >
+          랜덤 테스트
+        </Button>
+      </TesterWrapper>
       <SheetWrapper>
         <ArrowWrapper className="prev">
           <IconButton
@@ -79,6 +106,13 @@ const MainPageWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+const TesterWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
