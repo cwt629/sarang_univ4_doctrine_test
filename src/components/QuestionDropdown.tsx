@@ -15,12 +15,12 @@ const QuestionDropdown = ({
 }: ChapterDropdownProps) => {
   return (
     <FormControl fullWidth sx={{ marginTop: "20px" }}>
-      <InputLabel id="chapter-filter">Chapter</InputLabel>
+      <InputLabel id="chapter-filter">Question</InputLabel>
       <Select
         native
         labelId="chapter-filter"
         value={qIndex}
-        label="Chapter"
+        label="Question"
         onChange={(e) => handleDropdownItemChange(e.target.value as number)}
       >
         {answerSheet.map((chapterData, chapterIndex) => {
