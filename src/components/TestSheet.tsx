@@ -15,6 +15,7 @@ import { Answer, Verses } from "../types/Question";
 import { useEffect, useState } from "react";
 import TestInputBlock from "./TestInputBlock";
 import { CreateRounded, Replay } from "@mui/icons-material";
+import TestTipAccordion from "./TestTipAccordion";
 
 interface TestSheepProps {
   chapter: number;
@@ -39,6 +40,7 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
   return (
     <SheetContentWrapper>
       <Question chapter={chapter} questionNumber={questionNumber} />
+      <TestTipAccordion />
       <TableWrapper>
         <Table>
           <TableBody>
