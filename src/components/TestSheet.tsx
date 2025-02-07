@@ -70,6 +70,7 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
                               <TestInputBlock
                                 answer={verse.from}
                                 isSubmitted={isSubmitted}
+                                ignoreSpace={true}
                               />
                             </AdditionalInputWrapper>
                           ) : (

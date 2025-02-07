@@ -7,12 +7,14 @@ interface TestInputBlockProps {
   isSubmitted: boolean;
   answer: string;
   includes?: string[];
+  ignoreSpace?: boolean;
 }
 
 const TestInputBlock = ({
   isSubmitted,
   answer,
   includes = [],
+  ignoreSpace = false,
 }: TestInputBlockProps) => {
   const inputRef = useRef(null);
   const [submittedAnswer, setSubmittedAnswer] = useState<string | null>(null);
@@ -36,6 +38,7 @@ const TestInputBlock = ({
           userInput={submittedAnswer}
           answer={answer}
           includes={includes}
+          ignoreSpace={ignoreSpace}
         />
       ) : (
         <TextField
