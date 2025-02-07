@@ -21,7 +21,7 @@ const QuestionDropdown = ({
         labelId="chapter-filter"
         value={qIndex}
         label="Question"
-        onChange={(e) => handleDropdownItemChange(e.target.value as number)}
+        onChange={(e) => handleDropdownItemChange(Number(e.target.value))}
       >
         {answerSheet.map((chapterData, chapterIndex) => {
           const chapter = chapterData.chapter;
