@@ -36,7 +36,7 @@ const QuestionDropdown = ({
                   value={getIndexByChapterAndQNumber(chapter, qIndex)}
                 >
                   {question.question}
-                  {/* 필수인 거 표시해두기? */}
+                  {question.necessary ? " [필수]" : ""}
                 </option>
               ))}
             </optgroup>
