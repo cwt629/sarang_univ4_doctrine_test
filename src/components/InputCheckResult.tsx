@@ -1,3 +1,4 @@
+import { getCorrectedText } from "../utils/getCorrectedText";
 import { getHighlightedAnswerArray } from "../utils/getHighlightedAnswerArray";
 
 interface InputCheckResultProps {
@@ -13,34 +14,54 @@ const InputCheckResult = ({
   includes = [],
   ignoreSpace = false,
 }: InputCheckResultProps) => {
-  const isPerfectAnswer = (text: string) => {
+  const isPerfectAnswer = () => {
     // 띄어쓰기 무시는 includes가 없는 답에 한해 진행됨... 그렇지 않은 케이스가 생기면 더 보완이 필요하다.
-    if (ignoreSpace) return text.replace(/ /g, "") === answer.replace(/ /g, "");
-    return text === answer;
+    if (ignoreSpace)
+      return userInput.replace(/ /g, "") === answer.replace(/ /g, "");
+    return userInput === answer;
   };
 
-  const isWellIncludedAnswer = (text: string) =>
+  const isWellIncludedAnswer = () =>
     includes.length > 0 &&
-    includes.every((word: string) => text.includes(word));
+    includes.every((word: string) => userInput.includes(word));
 
-  const getPerfectAnswerDisplay = (text: string) => (
-    <b style={{ color: "var(--body-green)" }}>{text}</b>
+  const getPerfectAnswerDisplay = () => (
+    <b style={{ color: "var(--body-green)" }}>{userInput}</b>
   );
 
-  const getWellIncludedAnswerDisplay = (text: string) =>
-    getHighlightedAnswerArray(text, includes, "var(--body-green)");
+  const getWellIncludedAnswerDisplay = () => (
+    <>
+      {getHighlightedAnswerArray(userInput, includes, "var(--body-green)")}
+      <br />
+      <br />
+      <b>[정답]</b>
+      <br />
+      {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+    </>
+  );
 
-  const getWrongAnswerDisplay = (text: string) => (
-    <b style={{ color: "var(--body-red)" }}>{text}</b>
+  const getWrongAnswerDisplay = () => (
+    <>
+      {includes.length === 0 ? (
+        getCorrectedText(answer, userInput)
+      ) : (
+        <b style={{ color: "var(--body-red)" }}>{userInput}</b>
+      )}
+      <br />
+      <br />
+      <b>[정답]</b>
+      <br />
+      {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+    </>
   );
 
   return (
     <div>
-      {isPerfectAnswer(userInput)
-        ? getPerfectAnswerDisplay(userInput)
-        : isWellIncludedAnswer(userInput)
-        ? getWellIncludedAnswerDisplay(userInput)
-        : getWrongAnswerDisplay(userInput)}
+      {isPerfectAnswer()
+        ? getPerfectAnswerDisplay()
+        : isWellIncludedAnswer()
+        ? getWellIncludedAnswerDisplay()
+        : getWrongAnswerDisplay()}
     </div>
   );
 };
