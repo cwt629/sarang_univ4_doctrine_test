@@ -49,6 +49,7 @@ const AnswerSheet = ({ chapter, questionNumber }: AnswerSheetProps) => {
                           {verse.text ? (
                             <Box sx={{ width: "100%" }}>
                               <b>구절: </b>
+                              <br />
                               {verse.text}
                             </Box>
                           ) : (

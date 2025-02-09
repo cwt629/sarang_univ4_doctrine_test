@@ -65,25 +65,26 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
                           }}
                         >
                           {verse.from ? (
-                            <AdditionalInputWrapper>
+                            <VerseChapterInputWrapper>
                               <b>말씀 주소:</b>&nbsp;
                               <TestInputBlock
                                 answer={verse.from}
                                 isSubmitted={isSubmitted}
                                 ignoreSpace={true}
                               />
-                            </AdditionalInputWrapper>
+                            </VerseChapterInputWrapper>
                           ) : (
                             ""
                           )}
                           {verse.text ? (
-                            <AdditionalInputWrapper>
-                              <b>구절:</b>&nbsp;
+                            <VerseContentInputWrapper>
+                              <b>구절:</b>
+                              <br />
                               <TestInputBlock
                                 answer={verse.text}
                                 isSubmitted={isSubmitted}
                               />
-                            </AdditionalInputWrapper>
+                            </VerseContentInputWrapper>
                           ) : (
                             ""
                           )}
@@ -123,10 +124,15 @@ const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
 
 export default TestSheet;
 
-const AdditionalInputWrapper = styled.div`
+const VerseChapterInputWrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  margin: 5px 0;
+`;
+
+const VerseContentInputWrapper = styled.div`
+  width: 100%;
   margin: 5px 0;
 `;
 
