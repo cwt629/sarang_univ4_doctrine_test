@@ -13,14 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
-@font-face {
-  font-family: "SUIT-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-    format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   --body-blue: #1976d2;
   --body-gray: rgb(118, 118, 118);
@@ -34,7 +26,7 @@ body {
 }
 
 body * {
-  font-family: "SUIT-Regular" !important;
+  font-family: "SUIT Variable" !important;
 }
 
 /* @media (prefers-color-scheme: light) {
