@@ -34,9 +34,11 @@ const InputCheckResult = ({
       {getHighlightedAnswerArray(userInput, includes, "var(--body-green)")}
       <br />
       <br />
-      <b>[정답]</b>
+      <b style={{ color: "var(--body-blue)" }}>[정답]</b>
       <br />
-      {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+      <span style={{ color: includes.length === 0 ? "var(--body-blue)" : "" }}>
+        {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+      </span>
     </>
   );
 
@@ -49,9 +51,11 @@ const InputCheckResult = ({
       )}
       <br />
       <br />
-      <b>[정답]</b>
+      <b style={{ color: "var(--body-blue)" }}>[정답]</b>
       <br />
-      {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+      <span style={{ color: includes.length === 0 ? "var(--body-blue)" : "" }}>
+        {getHighlightedAnswerArray(answer, includes, "var(--body-blue)")}
+      </span>
     </>
   );
 
