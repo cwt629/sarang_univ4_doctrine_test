@@ -17,12 +17,12 @@ import TestInputBlock from "./TestInputBlock";
 import { CreateRounded, Replay } from "@mui/icons-material";
 import TestTipAccordion from "./TestTipAccordion";
 
-interface TestSheepProps {
+interface TestSheetProps {
   chapter: number;
   questionNumber: number;
 }
 
-const TestSheet = ({ chapter, questionNumber }: TestSheepProps) => {
+const TestSheet = ({ chapter, questionNumber }: TestSheetProps) => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleSubmitButtonClick = () => {

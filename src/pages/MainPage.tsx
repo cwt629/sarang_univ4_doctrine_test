@@ -42,12 +42,16 @@ const MainPage = () => {
     setIsTestingMode(checked);
   };
 
-  const handleNextQuestionClick = () => {
-    setQuestionIndex((prev) => prev + 1);
+  const handleNavigateNext = () => {
+    if (questionIndex < answerIndices.length - 1) {
+      setQuestionIndex((prev) => prev + 1);
+    }
   };
 
-  const handlePrevQuestionClick = () => {
-    setQuestionIndex((prev) => prev - 1);
+  const handleNavigatePrev = () => {
+    if (questionIndex > 0) {
+      setQuestionIndex((prev) => prev - 1);
+    }
   };
 
   return (
@@ -76,7 +80,7 @@ const MainPage = () => {
         <ArrowWrapper className="prev">
           <IconButton
             disabled={questionIndex <= 0}
-            onClick={() => handlePrevQuestionClick()}
+            onClick={() => handleNavigatePrev()}
           >
             <ArrowBack />
           </IconButton>
@@ -84,12 +88,17 @@ const MainPage = () => {
         {isTestingMode ? (
           <TestSheet chapter={chapter} questionNumber={questionNumber} />
         ) : (
-          <AnswerSheet chapter={chapter} questionNumber={questionNumber} />
+          <AnswerSheet
+            chapter={chapter}
+            questionNumber={questionNumber}
+            onNext={handleNavigateNext}
+            onPrev={handleNavigatePrev}
+          />
         )}
         <ArrowWrapper className="next">
           <IconButton
             disabled={questionIndex >= answerIndices.length - 1}
-            onClick={() => handleNextQuestionClick()}
+            onClick={() => handleNavigateNext()}
           >
             <ArrowForward />
           </IconButton>

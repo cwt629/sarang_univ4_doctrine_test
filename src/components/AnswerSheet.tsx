@@ -5,15 +5,40 @@ import { Answer, Verses } from "../types/Question";
 import { getHighlightedAnswerArray } from "../utils/getHighlightedAnswerArray";
 import Question from "./Question";
 import { TableWrapper } from "../wrapper/TableWrapper";
+import { useSwipeable } from "react-swipeable";
 
 interface AnswerSheetProps {
   chapter: number;
   questionNumber: number;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
-const AnswerSheet = ({ chapter, questionNumber }: AnswerSheetProps) => {
+const MINIMUM_SWIPE_WIDTH = 50;
+
+const AnswerSheet = ({
+  chapter,
+  questionNumber,
+  onNext,
+  onPrev,
+}: AnswerSheetProps) => {
+  const handlers = useSwipeable({
+    onSwipedLeft: (event) => {
+      if (Math.abs(event.deltaX) > MINIMUM_SWIPE_WIDTH) {
+        onNext();
+      }
+    },
+    onSwipedRight: (event) => {
+      if (Math.abs(event.deltaX) > MINIMUM_SWIPE_WIDTH) {
+        onPrev();
+      }
+    },
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
+
   return (
-    <SheetContentWrapper>
+    <SheetContentWrapper {...handlers}>
       <Question chapter={chapter} questionNumber={questionNumber} />
       <TableWrapper>
         <Table>
