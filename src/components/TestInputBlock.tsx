@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import InputCheckResult from "./InputCheckResult";
 
@@ -19,7 +19,7 @@ const TestInputBlock = ({
   const inputRef = useRef(null);
   const [submittedAnswer, setSubmittedAnswer] = useState<string | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isSubmitted) {
       setSubmittedAnswer(inputRef.current.value);
     } else {
@@ -27,7 +27,7 @@ const TestInputBlock = ({
     }
   }, [isSubmitted]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setSubmittedAnswer(null); // 다른 문제로 넘어갈 때마다 초기화
   }, [answer]);
 

@@ -12,7 +12,7 @@ import { TableWrapper } from "../wrapper/TableWrapper";
 import Question from "./Question";
 import { answerSheet } from "../constant/answersheet";
 import { Answer, Verses } from "../types/Question";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import TestInputBlock from "./TestInputBlock";
 import { CreateRounded, Replay } from "@mui/icons-material";
 import TestTipAccordion from "./TestTipAccordion";
@@ -33,7 +33,7 @@ const TestSheet = ({ chapter, questionNumber }: TestSheetProps) => {
     setIsSubmitted(false);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsSubmitted(false); // 문제가 바뀔 때마다 초기화
   }, [chapter, questionNumber]);
 
