@@ -161,7 +161,7 @@ answerSheet[2] = {
           includes: ["영원 전부터 영원까지"],
         },
         {
-          text: "스스로 계십니다",
+          text: "스스로 계십니다.",
           includes: ["스스로 계십니다"],
           verses: [
             {
@@ -195,7 +195,7 @@ answerSheet[3] = {
       necessary: false,
       answers: [
         {
-          text: "전능하신 하나님께서 말씀으로 창조하셨습니다",
+          text: "전능하신 하나님께서 말씀으로 창조하셨습니다.",
           includes: ["하나님께서 말씀"],
           verses: [
             {
@@ -273,7 +273,7 @@ answerSheet[4] = {
           includes: ["인류의 대표인 아담이 지은 죄"],
         },
         {
-          text: "모든 사람이 원죄 가운데 출생합니다",
+          text: "모든 사람이 원죄 가운데 출생합니다.",
           includes: ["모든 사람", "원죄 가운데 출생"],
           verses: [
             {
@@ -289,7 +289,7 @@ answerSheet[4] = {
       necessary: true,
       answers: [
         {
-          text: "자범죄라고 합니다",
+          text: "자범죄라고 합니다.",
           includes: ["자범죄"],
           verses: [
             {
@@ -428,7 +428,7 @@ answerSheet[5] = {
       necessary: false,
       answers: [
         {
-          text: "40일 동안 여러 차례 제자들에게 나타내 보이시고 가르치셨습니다",
+          text: "40일 동안 여러 차례 제자들에게 나타내 보이시고 가르치셨습니다.",
           includes: ["40일 동안 여러 차례 제자들에게 나타내 보이시고 가르치셨"],
           verses: [
             {
@@ -457,7 +457,7 @@ answerSheet[5] = {
           includes: ["오직 성령이 너희에게 임하시면 너희가 권능을 받고"],
         },
         {
-          text: "땅 끝까지 이르러 내 증인이 되리라고 하셨습니다",
+          text: "땅 끝까지 이르러 내 증인이 되리라고 하셨습니다.",
           includes: ["땅 끝까지 이르러 내 증인이 되리라고 하셨습니다"],
           verses: [{ from: "행 1:8" }],
         },
@@ -478,7 +478,7 @@ answerSheet[5] = {
       necessary: true,
       answers: [
         {
-          text: "예수 그리스도를 믿음으로만 구원 받습니다",
+          text: "예수 그리스도를 믿음으로만 구원 받습니다.",
           includes: ["예수 그리스도를 믿음으로만"],
           verses: [
             {
@@ -590,7 +590,7 @@ answerSheet[7] = {
       necessary: true,
       answers: [
         {
-          text: "예배를 드리고 선한 일을 하면서 거룩하게 지켜야 합니다",
+          text: "예배를 드리고 선한 일을 하면서 거룩하게 지켜야 합니다.",
           includes: ["예배", "선한 일", "거룩"],
           verses: [{ from: "사 58:13-14" }],
         },
@@ -635,7 +635,7 @@ answerSheet[7] = {
           includes: ["인색한 마음", "억지로 드릴 것이 아니고"],
         },
         {
-          text: "감사와 자원하는 마음으로 즐겨 바쳐야 할 것입니다",
+          text: "감사와 자원하는 마음으로 즐겨 바쳐야 할 것입니다.",
           includes: ["감사와 자원하는 마음", "즐겨 바쳐야"],
           verses: [{ from: "고후 9:7" }],
         },
@@ -656,7 +656,7 @@ answerSheet[7] = {
       necessary: false,
       answers: [
         {
-          text: "예수님의 이름으로 해야 합니다",
+          text: "예수님의 이름으로 해야 합니다.",
           includes: ["예수님"],
           verses: [
             {
@@ -694,7 +694,7 @@ answerSheet[8] = {
       necessary: false,
       answers: [
         {
-          text: "성경을 읽고 듣고 지키는 자입니다",
+          text: "성경을 읽고 듣고 지키는 자입니다.",
           includes: ["성경을 읽고 듣고 지키는 자"],
           verses: [
             {
